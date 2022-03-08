@@ -1,0 +1,83 @@
+name: Base Node Pipeline
+
+on:
+  workflow_call:
+      inputs:
+        serviceName:
+          required: true
+          type: string
+      secrets:
+        SONAR_TOKEN:
+          required: true
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        node-version: [ 12.x, 14.x, 16.x ]
+    name: Audit - Node.js ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run npm audit
+        run: |
+          npm ci
+          npm audit
+
+  codecov:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x, 14.x, 16.x ]
+    name: Coverage - Node.js ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run codecov
+        run: |
+          npm ci
+          npm run codecov
+  
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x, 14.x, 16.x ]
+    name: Lint - Node.js ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run lint
+        run: |
+          npm ci
+          npm run lint
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+    name: Analyze with SonarCloud
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        args: >
+          -Dsonar.organization=defra
+          -Dsonar.projectKey=${{ inputs.serviceName }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
