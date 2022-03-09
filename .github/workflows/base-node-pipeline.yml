@@ -64,6 +64,19 @@ jobs:
           npm ci
           npm run lint
 
+  secret-tester:
+    runs-on: ubuntu-latest
+    name: Tester
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          cache: 'npm'
+      - name: Echo
+        run: |
+          echo ${{ secrets.TEST_SECRET }}
+
   sonarcloud:
     runs-on: ubuntu-latest
     name: Analyze with SonarCloud
