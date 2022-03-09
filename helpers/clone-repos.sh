@@ -1,7 +1,7 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit
 
-source ../shared/repos.sh
+. ../shared/repos.sh
 
 cd ../../
 
