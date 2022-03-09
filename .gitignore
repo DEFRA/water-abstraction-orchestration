@@ -1,3 +1,2 @@
-shared/variables.sh
-docker/local-cm-config.env
-docker/docker-compose.services.yml
+shared/secrets.sh
+docker/charge-secrets.sh
