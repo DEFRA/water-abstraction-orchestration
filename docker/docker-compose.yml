@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:10-alpine
+    volumes:
+      - cha_api_db_volume:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_USER: charge
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chargedb
+
+  app:
+    image: environmentagency/sroc-charging-module-api:latest
+    ports:
+      - "3005:3000"
+    env_file:
+      - local-cm-config.env
+    depends_on:
+      - db
+
+  wrls-db:
+    image: postgres:10-alpine
+    volumes:
+      - wrls_db_volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: water
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: water
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+
+volumes:
+  cha_api_db_volume:
+  wrls_db_volume:
+  cache:
+    driver: local
