@@ -4,7 +4,6 @@ echo "Stopping the Water Services"
 cd "$(dirname "$0")" || exit
 
 . ../shared/repos.sh
-. ../shared/variables.sh
 
 cd ../../
 

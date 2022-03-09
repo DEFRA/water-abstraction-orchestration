@@ -1,10 +1,14 @@
 #!/bin/bash
 
 echo "Starting the Water Services"
+
+npm list -g | grep pm2 ||  npm install pm2 -g
+
 cd "$(dirname "$0")" || exit
 
 . ../shared/repos.sh
 . ../shared/variables.sh
+. ../shared/secrets.sh
 
 pm2 delete all
 
