@@ -6,4 +6,4 @@ cd "$(dirname "$0")" || exit
 . ../shared/secrets.sh
 . ../docker/charge-secrets.sh
 
-docker-compose up -d --build --force-recreate
+docker-compose up -d
