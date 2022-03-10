@@ -6,9 +6,10 @@ npm list -g | grep pm2 ||  npm install pm2 -g
 
 cd "$(dirname "$0")" || exit
 
+export $(grep -v '^#' ../secrets/.env | xargs)
+export $(grep -v '^#' ../shared/variables.env | xargs)
+
 . ../shared/repos.sh
-. ../shared/variables.sh
-. ../shared/secrets.sh
 
 pm2 delete all
 
