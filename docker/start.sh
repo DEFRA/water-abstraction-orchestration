@@ -2,8 +2,9 @@
 
 cd "$(dirname "$0")" || exit
 
-. ./docker-variables.sh
-. ../shared/secrets.sh
-. ../docker/charge-secrets.sh
+export $(grep -v '^#' ../secrets/.env.charge | xargs)
+export $(grep -v '^#' ../secrets/.env | xargs)
+export $(grep -v '^#' ../shared/variables.env | xargs)
+export $(grep -v '^#' .env.docker | xargs)
 
 docker-compose up -d

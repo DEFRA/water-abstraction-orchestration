@@ -2,6 +2,6 @@
 
 cd "$(dirname "$0")" || exit
 
-. ./docker-variables.sh
+export $(grep -v '^#' .env.docker | xargs)
 
 docker-compose down
