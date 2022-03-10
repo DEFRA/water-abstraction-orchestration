@@ -13,6 +13,9 @@ declare -a arr=(
 
 cd ../../
 
+export $(grep -v '^#' ../secrets/.env | xargs)
+export $(grep -v '^#' ../shared/variables.env | xargs)
+
 for i in "${arr[@]}"
 do
   cd $i;
@@ -21,5 +24,3 @@ do
   printf "\n----------------------------------------\n";
   cd ..
 done
-
-pm2 save
