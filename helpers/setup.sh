@@ -12,8 +12,6 @@ for i in "${repositories[@]}"
 do
   cd $i;
   echo $i;
-  rm -r node_modules;
-  rm package-lock.json
-  npm i;
+  npm ci
   cd ..
 done

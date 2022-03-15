@@ -19,7 +19,7 @@ for i in "${repositories[@]}"
 do
   cd $i;
   echo $i;
-  pm2 start ecosystem.config.json;
+  pm2 start ecosystem.config.json --update-env
   printf "\n----------------------------------------\n";
   cd ..
 done

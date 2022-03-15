@@ -30,23 +30,6 @@ jobs:
           npm ci
           npm audit
 
-  codecov:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 12.x, 14.x ]
-    name: Coverage - Node.js ${{ matrix.node-version }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: Run codecov
-        run: |
-          npm ci
-          npm run codecov
-  
   lint:
     runs-on: ubuntu-latest
     strategy:

@@ -55,9 +55,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: water
+      POSTGRES_USER: water_user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: water
+      POSTGRES_DB: permits
 
   redis:
     image: redis:6.2-alpine
