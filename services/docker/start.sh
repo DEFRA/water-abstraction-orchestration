@@ -6,6 +6,8 @@ export REGISTRY="ghcr.io/defra"
 export DEFAULT_TAG="develop"
 export TAG="${1:-$DEFAULT_TAG}"
 
+echo "Format branch to - separated"
+TAG="${TAG//\//-}"
 echo "TAG = $TAG"
 
 GET_TAG() {
@@ -14,10 +16,12 @@ GET_TAG() {
   && echo $TAG || echo $DEFAULT_TAG
 }
 
+echo "Try and get tag"
 export WATER_SERVICE_API_TAG=$(GET_TAG "water-abstraction-service")
+echo "Tag complete"
 export COMPOSE_PROJECT_NAME="water-orchestration"
 
-export $(grep -v '^#' ../..//secrets/.env | xargs)
+export $(grep -v '^#' ../../secrets/.env | xargs)
 export $(grep -v '^#' ../variables.env | xargs)
 
 . ./variables.sh
