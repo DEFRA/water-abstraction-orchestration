@@ -1,9 +1,9 @@
 #!/bin/bash
 cd "$(dirname "$0")" || exit
 
-. ../shared/repos.sh
+. ../../services/repos.sh
 
-cd ../../
+cd ../../../
 
 for repository in "${repositories[@]}"
 do

@@ -14,7 +14,7 @@ declare -a arr=(
 cd ../../
 
 export $(grep -v '^#' ../secrets/.env | xargs)
-export $(grep -v '^#' ../shared/variables.env | xargs)
+export $(grep -v '^#' ./variables.env | xargs)
 
 for i in "${arr[@]}"
 do

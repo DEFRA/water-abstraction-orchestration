@@ -3,8 +3,8 @@
 echo "Setting up node repos"
 cd "$(dirname "$0")" || exit
 
-. ../shared/repos.sh
-. ../shared/variables.sh
+. ./repos.sh
+. ./variables.sh
 
 cd ../../
 

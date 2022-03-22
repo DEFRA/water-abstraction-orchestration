@@ -6,14 +6,14 @@ npm list -g | grep pm2 ||  npm install pm2 -g
 
 cd "$(dirname "$0")" || exit
 
-export $(grep -v '^#' ../secrets/.env | xargs)
-export $(grep -v '^#' ../shared/variables.env | xargs)
+export $(grep -v '^#' ../../secrets/.env | xargs)
+export $(grep -v '^#' ../variables.env | xargs)
 
-. ../shared/repos.sh
+. ../repos.sh
 
 pm2 delete all
 
-cd ../../
+cd ../../../
 
 for i in "${repositories[@]}"
 do
