@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  water-abstraction-service-api:
+    container_name: water-abstraction-service-api
+    image: ${REGISTRY}/water-abstraction-service:${WATER_SERVICE_API_TAG}
+    ports:
+      - "8001:8001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: "water-api"
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      PERMIT_URI: ${PERMIT_URI}
+      CRM_URI: ${CRM_URI}
+      RETURNS_URI: ${RETURNS_URI}
+      IDM_URI: ${IDM_URI}
+      CHARGE_MODULE_ORIGIN: ${CHARGE_MODULE_ORIGIN}
+      S3_BUCKET: ${S3_BUCKET}
+      S3_KEY: ${S3_KEY}
+      S3_SECRET: ${S3_SECRET}
+      TEST_NOTIFY_KEY: ${TEST_NOTIFY_KEY}
+      WHITELIST_NOTIFY_KEY: ${WHITELIST_NOTIFY_KEY}
+      SLACK_HOOK: ${SLACK_HOOK}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      TEST_MODE: ${TEST_MODE}
+      NODE_ENV: local
+      NALD_ZIP_PASSWORD: ${NALD_ZIP_PASSWORD}
+      COGNITO_HOST: ${COGNITO_HOST}
+      COGNITO_USERNAME: ${COGNITO_USERNAME}
+      COGNITO_PASSWORD: ${COGNITO_PASSWORD}
+      COMPANIES_HOUSE_API_KEY: ${COMPANIES_HOUSE_API_KEY}
+      EA_ADDRESS_FACADE_URI: ${EA_ADDRESS_FACADE_URI}
+      WATER_SERVICE_MAILBOX: ${WATER_SERVICE_MAILBOX}
+      NALD_SERVICE_MAILBOX: ${NALD_SERVICE_MAILBOX}
