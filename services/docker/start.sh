@@ -16,9 +16,7 @@ GET_TAG() {
   && echo $TAG || echo $DEFAULT_TAG
 }
 
-echo "Try and get tag"
 export WATER_SERVICE_API_TAG=$(GET_TAG "water-abstraction-service")
-echo "Tag complete"
 export COMPOSE_PROJECT_NAME="water-orchestration"
 
 export $(grep -v '^#' ../../secrets/.env | xargs)
