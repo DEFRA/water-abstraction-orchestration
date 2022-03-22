@@ -38,3 +38,51 @@ services:
       EA_ADDRESS_FACADE_URI: ${EA_ADDRESS_FACADE_URI}
       WATER_SERVICE_MAILBOX: ${WATER_SERVICE_MAILBOX}
       NALD_SERVICE_MAILBOX: ${NALD_SERVICE_MAILBOX}
+  water-abstraction-external-ui:
+    container_name: water-abstraction-external-ui
+    image: ${REGISTRY}/water-abstraction-ui/external-ui:${WATER_EXTERNAL_UI_TAG}
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: "external-ui"
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      WATER_URI: ${WATER_URI}
+      PERMIT_URI: ${PERMIT_URI}
+      CRM_URI: ${CRM_URI}
+      RETURNS_URI: ${RETURNS_URI}
+      IDM_URI: ${IDM_URI}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      TEST_MODE: ${TEST_MODE}
+      NODE_ENV: local
+  water-abstraction-internal-ui:
+    container_name: water-abstraction-internal-ui
+    image: ${REGISTRY}/water-abstraction-ui/internal-ui:${WATER_INTERNAL_UI_TAG}
+    ports:
+      - "8008:8008"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: "internal-ui"
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      WATER_URI: ${WATER_URI}
+      PERMIT_URI: ${PERMIT_URI}
+      CRM_URI: ${CRM_URI}
+      RETURNS_URI: ${RETURNS_URI}
+      IDM_URI: ${IDM_URI}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      TEST_MODE: ${TEST_MODE}
+      NODE_ENV: local
