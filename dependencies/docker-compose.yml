@@ -15,13 +15,64 @@ services:
 
   redis:
     image: redis
+    container_name: redis
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
     volumes:
       - cache:/data
 
+# Charge Module
+  charge-module-database:
+    image: postgres
+    container_name: charge-module-database
+    volumes:
+      - cha_api_db_volume:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_USER: charge
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chargedb
+
+  charge-module-api:
+    image: environmentagency/sroc-charging-module-api:latest
+    container_name: charge-module-api
+    ports:
+      - "3005:3000"
+    env_file:
+      - ./charge-module/local-cm-config.env
+    environment:
+      PORT: 3000
+      # AWS
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${S3_KEY}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET}
+      UPLOAD_BUCKET: ${S3_BUCKET}
+      ARCHIVE_BUCKET: ${S3_BUCKET}
+      # Database config
+      POSTGRES_USER: charge
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: charge-module-database
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: chargedb
+      # Airbrake config
+      AIRBRAKE_HOST: ${AIRBRAKE_HOST}
+      AIRBRAKE_KEY: ${AIRBRAKE_KEY}
+      # Authentication config
+      ADMIN_CLIENT_ID: ${ADMIN_CLIENT_ID}
+      SYSTEM_CLIENT_ID: ${SYSTEM_CLIENT_ID}
+      # Rules service
+      RULES_SERVICE_URL: ${RULES_SERVICE_URL}
+      RULES_SERVICE_USER: ${RULES_SERVICE_USER}
+      RULES_SERVICE_PASSWORD: ${RULES_SERVICE_PASSWORD}
+      DECISION_SERVICE_URL: ${RULES_SERVICE_URL}
+      DECISION_SERVICE_USER: ${RULES_SERVICE_USER}
+      DECISION_SERVICE_PASSWORD: ${RULES_SERVICE_PASSWORD}
+    depends_on:
+      - charge-module-database
 volumes:
+  cha_api_db_volume:
   wrls_db_volume:
   cache:
     driver: local

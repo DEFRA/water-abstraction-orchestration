@@ -11,10 +11,10 @@ declare -a arr=(
   "water-abstraction-import"
 )
 
-cd ../../
-
 export $(grep -v '^#' ../secrets/.env | xargs)
 export $(grep -v '^#' ./variables.env | xargs)
+
+cd ../../
 
 for i in "${arr[@]}"
 do
