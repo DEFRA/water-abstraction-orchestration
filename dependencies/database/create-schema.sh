@@ -1,6 +1,10 @@
 #!/bin/bash
 
 echo "PSQL - Create Schema if not exists"
+
+export PGUSER=water_user
+export PGDATABASE=permits
+
 PGPASSWORD=password psql -h localhost -p 5432 -U water_user -tc "CREATE SCHEMA IF NOT EXISTS idm"
 PGPASSWORD=password psql -h localhost -p 5432 -U water_user -tc "CREATE SCHEMA IF NOT EXISTS crm"
 PGPASSWORD=password psql -h localhost -p 5432 -U water_user -tc "CREATE SCHEMA IF NOT EXISTS crm_v2"
