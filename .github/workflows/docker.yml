@@ -2,6 +2,10 @@ name: Create and publish a Docker image
 
 on:
   workflow_call:
+    inputs:
+      branch:
+        required: true
+        type: string
   workflow_dispatch:
 
 env:
