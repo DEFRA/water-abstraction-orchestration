@@ -11,11 +11,6 @@ declare -a arr=(
   "water-abstraction-import"
 )
 
-export $(grep -v '^#' ../secrets/.env | xargs)
-export $(grep -v '^#' ./variables.env | xargs)
-
-cd ../../
-
 for i in "${arr[@]}"
 do
   docker exec "${i}-api" npm run migrate
