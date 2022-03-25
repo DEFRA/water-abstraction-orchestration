@@ -62,6 +62,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       TEST_MODE: ${TEST_MODE}
       NODE_ENV: local
+      NOTIFY_CALLBACK_TOKEN: ${NOTIFY_CALLBACK_TOKEN}
   water-abstraction-internal-ui:
     container_name: water-abstraction-internal-ui
     image: ${REGISTRY}/water-abstraction-ui/internal-ui:${WATER_INTERNAL_UI_TAG}
