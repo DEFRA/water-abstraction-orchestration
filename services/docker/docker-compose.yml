@@ -86,3 +86,118 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       TEST_MODE: ${TEST_MODE}
       NODE_ENV: local
+#   New services
+  water-abstraction-import-api:
+    container_name: water-abstraction-import-api
+    image: ${REGISTRY}/water-abstraction-import:${WATER_IMPORT_API_TAG}
+    ports:
+      - "8007:8007"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: water-abstraction-import
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      WATER_URI: ${WATER_URI}
+      CRM_URI: ${CRM_URI}
+      RETURNS_URI: ${RETURNS_URI}
+      S3_BUCKET: ${S3_BUCKET}
+      S3_KEY: ${S3_KEY}
+      S3_SECRET: ${S3_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      NODE_ENV: local
+      NALD_ZIP_PASSWORD: ${NALD_ZIP_PASSWORD}
+      SLACK_HOOK: ${SLACK_HOOK}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
+      # Unknown Values
+      PROXY:
+      IMPORT_RETURNS_YEARS:
+      S3_NALD_IMPORT_PATH: 
+      WATER_SERVICE_MAILBOX:
+  water-abstraction-reporting-api:
+    container_name: water-abstraction-reporting-api
+    image: ${REGISTRY}/water-abstraction-reporting:${WATER_REPORTING_API_TAG}
+    ports:
+      - "8011:8011"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: water-abstraction-reporting
+      NODE_ENV: local
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      S3_BUCKET: ${S3_BUCKET}
+      S3_KEY: ${S3_KEY}
+      S3_SECRET: ${S3_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+  water-abstraction-returns-api:
+    container_name: water-abstraction-returns-api
+    image: ${REGISTRY}/water-abstraction-returns:${WATER_RETURNS_API_TAG}
+    ports:
+      - "8006:8006"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: water-abstraction-returns
+      NODE_ENV: local
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      DATABASE_URL: ${DATABASE_URL}
+  water-abstraction-tactical-crm-api:
+    container_name: water-abstraction-tactical-crm-api
+    image: ${REGISTRY}/water-abstraction-tactical-crm:${WATER_TACTICAL_CRM_API_TAG}
+    ports:
+      - "8002:8002"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: tactical-crm
+      NODE_ENV: local
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      DATABASE_URL: ${DATABASE_URL}
+  water-abstraction-tactical-idm-api:
+    container_name: water-abstraction-tactical-idm-api
+    image: ${REGISTRY}/water-abstraction-tactical-idm:${WATER_TACTICAL_IDM_API_TAG}
+    ports:
+      - "8003:8003"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: tactical-idm
+      NODE_ENV: local
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      DATABASE_URL: ${DATABASE_URL}
+      WATER_URI: ${WATER_URI}
+      SLACK_HOOK: ${SLACK_HOOK}
+  water-abstraction-permit-repository-api:
+    container_name: water-abstraction-permit-repository-api
+    image: ${REGISTRY}/water-abstraction-permit-repository:${WATER_PERMIT_API_TAG}
+    ports:
+      - "8004:8004"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SERVICE_NAME: tactical-idm
+      NODE_ENV: local
+      JWT_TOKEN: ${JWT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      ERRBIT_KEY: ${ERRBIT_KEY}
+      ERRBIT_SERVER: ${ERRBIT_SERVER}
+      NOTIFY_KEY: ${TEST_NOTIFY_KEY}
+      DATABASE_URL: ${DATABASE_URL}

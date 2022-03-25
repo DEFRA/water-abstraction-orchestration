@@ -19,7 +19,12 @@ GET_TAG() {
 export WATER_SERVICE_API_TAG=$(GET_TAG "water-abstraction-service")
 export WATER_INTERNAL_UI_TAG=$(GET_TAG "water-abstraction-ui/internal-ui")
 export WATER_EXTERNAL_UI_TAG=$(GET_TAG "water-abstraction-ui/external-ui")
-
+export WATER_IMPORT_API_TAG=$(GET_TAG "water-abstraction-import")
+export WATER_REPORTING_API_TAG=$(GET_TAG "water-abstraction-reporting")
+export WATER_RETURNS_API_TAG=$(GET_TAG "water-abstraction-returns")
+export WATER_TACTICAL_CRM_API_TAG=$(GET_TAG "water-abstraction-tactical-crm")
+export WATER_TACTICAL_IDM_API_TAG=$(GET_TAG "water-abstraction-tactical-idm")
+export WATER_PERMIT_API_TAG=$(GET_TAG "water-abstraction-permit-repository")
 
 export $(grep -v '^#' ../../secrets/.env | xargs)
 export $(grep -v '^#' ../variables.env | xargs)

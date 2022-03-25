@@ -40,6 +40,8 @@ services:
     container_name: charge-module-api
     ports:
       - "3005:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     env_file:
       - ./charge-module/local-cm-config.env
     environment:
