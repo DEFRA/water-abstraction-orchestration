@@ -34,6 +34,7 @@ export $(grep -v '^#' ../variables.env | xargs)
 echo "HOST --- ${REDIS_HOST}"
 
 export COMPOSE_PROJECT_NAME="water-orchestration"
+docker-compose pull
 docker-compose up -d
 
 # Branch: feat-pipeline-regression-tests
