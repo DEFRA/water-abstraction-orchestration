@@ -3,10 +3,10 @@
 echo "Setting up node repos"
 cd "$(dirname "$0")" || exit
 
-. ./repos.sh
-. ./variables.sh
+. ../../services/repos.sh
+export $(grep -v '^#' ../../services/variables.env | xargs)
 
-cd ../../
+cd ../../../
 
 for i in "${repositories[@]}"
 do
